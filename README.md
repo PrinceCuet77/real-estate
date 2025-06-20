@@ -2,8 +2,8 @@
   - [Client Installation](#client-installation)
   - [Install Tailwind CSS3](#install-tailwind-css3)
     - [Install Tailwind CSS](#install-tailwind-css)
-    - [Configure PostCSS Plugins](#configure-postcss-plugins)
-    - [Import Tailwind CSS](#import-tailwind-css)
+    - [Configure your template paths](#configure-your-template-paths)
+    - [Add the Tailwind directives to your CSS](#add-the-tailwind-directives-to-your-css)
   - [Install Shadcn/ui](#install-shadcnui)
 
 # Real Estate
@@ -34,32 +34,43 @@ npm i -D @types/node @types/uuid
 
 ### Install Tailwind CSS
 
-- Install `@tailwindcss/postcss` and its peer dependencies via npm.
+- Install `tailwindcss` and its peer dependencies via npm, and then run the init command to generate both `tailwind.config.js` and `postcss.config.js`.
 
 ```cmd
-npm install tailwindcss @tailwindcss/postcss postcss
+npm install -D tailwindcss@3 postcss autoprefixer
+npx tailwindcss init -p
 ```
 
-### Configure PostCSS Plugins
+### Configure your template paths
 
-- Create a `postcss.config.mjs` file in the root of your project and add the `@tailwindcss/postcss` plugin to your PostCSS configuration.
+- Add the paths to all of your template files in your `tailwind.config.js` file.
 
 ```js
-const config = {
-  plugins: {
-    '@tailwindcss/postcss': {},
-  },
-};
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
 
-export default config;
+    // Or if using `src` directory:
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
 ```
 
-### Import Tailwind CSS
+### Add the Tailwind directives to your CSS
 
-- Add an `@import` to `./src/app/globals.css` that imports Tailwind CSS.
+- Add the `@tailwind` directives for each of Tailwind’s layers to your `globals.css` file.
 
 ```css
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 ```
 
 ## Install Shadcn/ui
