@@ -15,12 +15,19 @@
 ```cmd
 npx create-next-app@latest
 ```
-
-![Install NextJS](photo/install-nextjs.png)
+- `TypeScript` - Yes
+- `ESLint` - Yes
+- `Tailwind CSS` - Yes
+- `src/` - Yes
+- `App Router` - Yes
+- `Turbopack` - No
+- `import alias` - No
 
 - Install other packages
 
 ```cmd
+cd client
+
 npm i lucide-react dotenv date-fns react-filepond filepond filepond-plugin-image-exif-orientation filepond-plugin-image-preview framer-motion mapbox-gl lodash react-hook-form zod @hookform/resolvers react-redux @reduxjs/toolkit
 ```
 
