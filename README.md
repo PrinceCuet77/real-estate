@@ -5,8 +5,11 @@
     - [Configure your template paths](#configure-your-template-paths)
     - [Add the Tailwind directives to your CSS](#add-the-tailwind-directives-to-your-css)
   - [Install Shadcn/ui](#install-shadcnui)
+  - [Install Postgis In PostgreSQL](#install-postgis-in-postgresql)
 
 # Real Estate
+
+- [Diagrams](https://miro.com/app/board/uXjVLgjxNpE=/)
 
 ## Client Installation
 
@@ -15,6 +18,7 @@
 ```cmd
 npx create-next-app@latest
 ```
+
 - `TypeScript` - Yes
 - `ESLint` - Yes
 - `Tailwind CSS` - Yes
@@ -29,6 +33,10 @@ npx create-next-app@latest
 cd client
 
 npm i lucide-react dotenv date-fns react-filepond filepond filepond-plugin-image-exif-orientation filepond-plugin-image-preview framer-motion mapbox-gl lodash react-hook-form zod @hookform/resolvers react-redux @reduxjs/toolkit
+
+npm i @fortawesome/fontawesome-svg-core
+npm i @fontawesome/free-brands-svg-icons
+npm i @fontawesome/react-fontawesome --legacy-peer-deps
 ```
 
 - Install dev dependencies
@@ -92,4 +100,42 @@ npx shadcn@latest init
 
 ```cmd
 npx shadcn@latest add avatar badge button card checkbox command dialog dropdown-menu form input label navigation-menu radio-group select separator sheet sidebar skeleton slider sonner switch table tabs textarea tooltip
+```
+
+## Install Postgis In PostgreSQL
+
+- Add a query tool on the PostgreSQL
+
+```cmd
+CREATE EXTENSION IF NOT EXIST "postgis";
+```
+
+- My PostgreSQL is not having the postgis by default as using `12+` version
+- You can check if a PostGIS package for PostgreSQL 12 exists:
+
+```cmd
+sudo apt list | grep postgresql-12-postgis
+```
+
+- Terminal shows something like:
+
+```txt
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+postgresql-12-postgis-3-dbgsym/jammy-pgdg 3.6.0+dfsg-2.pgdg22.04+1 amd64
+postgresql-12-postgis-3-scripts/jammy-pgdg 3.6.0+dfsg-2.pgdg22.04+1 all
+postgresql-12-postgis-3/jammy-pgdg 3.6.0+dfsg-2.pgdg22.04+1 amd64
+```
+
+- Install PostGIS for PostgreSQL 12:
+
+```cmd
+sudo apt update
+sudo apt install postgresql-12-postgis-3 postgresql-12-postgis-3-scripts
+```
+
+- After installation, confirm that the control file now exists:
+
+```cmd
+ls /usr/share/postgresql/12/extension/postgis.control
 ```
