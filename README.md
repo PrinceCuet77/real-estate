@@ -6,6 +6,7 @@
     - [Add the Tailwind directives to your CSS](#add-the-tailwind-directives-to-your-css)
   - [Install Shadcn/ui](#install-shadcnui)
   - [Install Postgis In PostgreSQL](#install-postgis-in-postgresql)
+  - [Backend](#backend)
 
 # Real Estate
 
@@ -138,4 +139,19 @@ sudo apt install postgresql-12-postgis-3 postgresql-12-postgis-3-scripts
 
 ```cmd
 ls /usr/share/postgresql/12/extension/postgis.control
+```
+
+## Backend
+
+```cmd
+mkdir server
+cd server
+
+npm init -y
+
+npm i express body-parser cors dotenv helmet morgan jsonwebtoken multer uuid axios @terraformer/wkt @aws-sdk/client-s3 @aws-sdk/lib-storage
+
+npm i -D rimraf concurrently nodemon shx ts-node typescript @types/cors @types/morgan @types/node @types/jsonwebtoken @types/multer @types/terraformer__wkt @types/uuid
+
+npx tsc --init
 ```
