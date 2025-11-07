@@ -103,6 +103,12 @@ npx shadcn@latest init
 npx shadcn@latest add avatar badge button card checkbox command dialog dropdown-menu form input label navigation-menu radio-group select separator sheet sidebar skeleton slider sonner switch table tabs textarea tooltip
 ```
 
+- AWS setup
+
+```cmd
+npm install @aws-amplify/ui-react aws-amplify --legacy-peer-deps
+```
+
 ## Install Postgis In PostgreSQL
 
 - Add a query tool on the PostgreSQL
@@ -154,4 +160,22 @@ npm i express body-parser cors dotenv helmet morgan jsonwebtoken multer uuid axi
 npm i -D rimraf concurrently nodemon shx ts-node typescript @types/cors @types/morgan @types/node @types/jsonwebtoken @types/multer @types/terraformer__wkt @types/uuid
 
 npx tsc --init
+```
+
+- Prisma setup
+
+```cmd
+npm i prisma @prisma/client
+npm run prisma:generate
+npx prisma migrate dev --name init
+npm run seed
+```
+
+- If I have any database related issue:
+
+```cmd
+npx prisma migrate reset
+npm run prisma:generate
+npx prisma migrate dev --name init
+npm run seed
 ```
