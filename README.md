@@ -162,6 +162,13 @@ npm i -D rimraf concurrently nodemon shx ts-node typescript @types/cors @types/m
 npx tsc --init
 ```
 
+- Install `prisma` related things
+
+```cmd
+npm i prisma @prisma/client
+npx prisma init
+```
+
 - Prisma setup
 
 ```cmd
