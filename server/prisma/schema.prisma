@@ -88,11 +88,11 @@ model Property {
   managerCognitoId  String
 
   location     Location      @relation(fields: [locationId], references: [id]) // One-to-One relation with Location
-  manager      Manager       @relation(fields: [managerCognitoId], references: [cognitoId])
+  manager      Manager       @relation(fields: [managerCognitoId], references: [cognitoId]) // One-to-Many relation with Manager
   leases       Lease[] // One-to-Many relation with Lease
-  applications Application[]
-  favoritedBy  Tenant[]      @relation("TenantFavorites")
-  tenants      Tenant[]      @relation("TenantProperties")
+  applications Application[] // One-to-Many relation with Application
+  favoritedBy  Tenant[]      @relation("TenantFavorites") // Many-to-Many relation with Tenant for favorites
+  tenants      Tenant[]      @relation("TenantProperties") // Many-to-Many relation with Tenant for current tenants
 }
 
 model Manager {
@@ -102,7 +102,7 @@ model Manager {
   email       String
   phoneNumber String
 
-  managedProperties Property[]
+  managedProperties Property[] // One-to-Many relation with Property
 }
 
 model Tenant {
@@ -112,10 +112,10 @@ model Tenant {
   email       String
   phoneNumber String
 
-  properties   Property[]    @relation("TenantProperties")
-  favorites    Property[]    @relation("TenantFavorites")
-  applications Application[]
-  leases       Lease[]
+  properties   Property[]    @relation("TenantProperties") // Many-to-Many relation with Property for current tenants
+  favorites    Property[]    @relation("TenantFavorites") // Many-to-Many relation with Property for favorites
+  applications Application[] // One-to-Many relation with Application
+  leases       Lease[] // One-to-Many relation with Lease
 }
 
 model Location {
@@ -127,7 +127,7 @@ model Location {
   postalCode  String
   coordinates Unsupported("geography(Point, 4326)")
 
-  properties Property[]
+  properties Property[] // One-to-Many relation with Property
 }
 
 model Application {
@@ -142,9 +142,9 @@ model Application {
   message         String?
   leaseId         Int?              @unique
 
-  property Property @relation(fields: [propertyId], references: [id])
-  tenant   Tenant   @relation(fields: [tenantCognitoId], references: [cognitoId])
-  lease    Lease?   @relation(fields: [leaseId], references: [id])
+  property Property @relation(fields: [propertyId], references: [id]) // Many-to-One relation with Property
+  tenant   Tenant   @relation(fields: [tenantCognitoId], references: [cognitoId]) // Many-to-One relation with Tenant
+  lease    Lease?   @relation(fields: [leaseId], references: [id]) // One-to-One relation with Lease
 }
 
 model Lease {
@@ -156,10 +156,10 @@ model Lease {
   propertyId      Int
   tenantCognitoId String
 
-  property    Property     @relation(fields: [propertyId], references: [id])
-  tenant      Tenant       @relation(fields: [tenantCognitoId], references: [cognitoId])
-  application Application?
-  payments    Payment[]
+  property    Property     @relation(fields: [propertyId], references: [id]) // Many-to-One relation with Property
+  tenant      Tenant       @relation(fields: [tenantCognitoId], references: [cognitoId]) // Many-to-One relation with Tenant
+  application Application? // One-to-One relation with Application
+  payments    Payment[] // One-to-Many relation with Payment
 }
 
 model Payment {
@@ -171,5 +171,5 @@ model Payment {
   paymentStatus PaymentStatus
   leaseId       Int
 
-  lease Lease @relation(fields: [leaseId], references: [id])
+  lease Lease @relation(fields: [leaseId], references: [id]) // Many-to-One relation with Lease
 }
