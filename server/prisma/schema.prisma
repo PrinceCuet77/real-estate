@@ -87,8 +87,8 @@ model Property {
   locationId        Int
   managerCognitoId  String
 
-  location     Location      @relation(fields: [locationId], references: [id]) // One-to-One relation with Location
-  manager      Manager       @relation(fields: [managerCognitoId], references: [cognitoId]) // One-to-Many relation with Manager
+  location     Location      @relation(fields: [locationId], references: [id]) // Many-to-One relation with Location
+  manager      Manager       @relation(fields: [managerCognitoId], references: [cognitoId]) // Many-to-One relation with Manager
   leases       Lease[] // One-to-Many relation with Lease
   applications Application[] // One-to-Many relation with Application
   favoritedBy  Tenant[]      @relation("TenantFavorites") // Many-to-Many relation with Tenant for favorites
